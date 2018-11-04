@@ -1,2 +1,8 @@
-# connectoq-time-battery
-Time of day data field with additional battery level information for Garmin IQ
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Issues](https://img.shields.io/github/issues/peregin/connectiq-time-battery.svg)](https://github.com/peregin/connectiq-time-battery/issues)
+
+Garmin data field for time of day and battery information
+=========================================================
+
+The data field shows the current time of day as main indicators. 
+On the top of the field it displays the battery level and temperature.
