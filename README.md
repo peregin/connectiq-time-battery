@@ -4,5 +4,7 @@
 Garmin data field for time of day and battery information
 =========================================================
 
-The data field shows the current time of day as main indicators. 
-On the top of the field it displays the battery level and temperature.
+The data field shows the current time of day as main indicators.
+On the top of the field it displays the battery level.
+
+![edge820](https://raw.github.com/peregin/connectiq-time-battery/master/doc/edge820.png "edge820")
