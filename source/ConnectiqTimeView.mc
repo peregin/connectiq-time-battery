@@ -13,6 +13,7 @@ class ConnectiqTimeView extends Ui.DataField {
     hidden var width2 = width/2;
     hidden var y = 0;
     hidden var height = 50; // it is recalculated in onLayout
+    hidden var xs = 5;
 
     hidden var hasBackgroundColorOption = false;
     hidden var backgroundColor = Graphics.COLOR_WHITE;
@@ -28,19 +29,6 @@ class ConnectiqTimeView extends Ui.DataField {
     }
 
     function onLayout(dc) {
-        if (hasBackgroundColorOption) {
-            backgroundColor = getBackgroundColor();
-            if (backgroundColor == Graphics.COLOR_BLACK) {
-                // night
-                textColor = Graphics.COLOR_WHITE;
-                unitColor = Graphics.COLOR_LT_GRAY;
-            } else {
-                // daylight
-                textColor = Graphics.COLOR_BLACK;
-                unitColor = 0x444444;
-            }
-        }
-
         calculateSize(dc);
         //System.println("size is [" + width + "," + height + "]");
 
@@ -50,6 +38,8 @@ class ConnectiqTimeView extends Ui.DataField {
     // Display the value you computed here. This will be called once a second when the data field is visible.
     // Resolution, WxH	200 x 265 pixels for both 520 and 820
     function onUpdate(dc) {
+        setupColors();
+
         // clear background
         dc.setColor(textColor, backgroundColor);
         dc.clear();
@@ -66,7 +56,7 @@ class ConnectiqTimeView extends Ui.DataField {
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
         var curTextSize = dc.getTextDimensions(text, font);
 
-        var x = width2 + curTextSize[0] / 2;
+        var x = width2 + curTextSize[0] / 2 - xs;
         var y = height - curTextSize[1] + 5;
         if (is24Hour) {
             dc.drawText(x, y, font, text, RIGHT_BOTTOM);
@@ -76,7 +66,8 @@ class ConnectiqTimeView extends Ui.DataField {
             dc.drawText(x, y, Graphics.FONT_XTINY, amOrPm, LEFT_BOTTOM);
         }
 
-        drawBattery(dc, 2, 2, 20, 14);
+        x = width2 - curTextSize[0] / 2 - xs;
+        drawBattery(dc, x, 2, 27, 15);
     }
 
     function drawBattery(dc, xs, ys, width, height) {
@@ -97,7 +88,7 @@ class ConnectiqTimeView extends Ui.DataField {
         dc.fillRectangle(xs + width - 1, ys + 3, 3, height - 6);
 
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(xs + 2 + width / 2, ys + 6, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
+        dc.drawText(xs + 1 + width / 2, ys + 6, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
     }
 
     function compute12Hour(hour) {
@@ -117,5 +108,20 @@ class ConnectiqTimeView extends Ui.DataField {
         height = dc.getHeight();
 
         width2 = width/2;
+    }
+
+    function setupColors() {
+        if (hasBackgroundColorOption) {
+            backgroundColor = getBackgroundColor();
+            if (backgroundColor == Graphics.COLOR_BLACK) {
+                // night
+                textColor = Graphics.COLOR_WHITE;
+                unitColor = Graphics.COLOR_LT_GRAY;
+            } else {
+                // daylight
+                textColor = Graphics.COLOR_BLACK;
+                unitColor = 0x444444;
+            }
+        }
     }
 }
