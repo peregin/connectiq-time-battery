@@ -80,7 +80,7 @@ class ConnectiqTimeView extends Ui.DataField {
         } else if (battery < 30) {
             dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
         } else {
-            dc.setColor(Graphics.COLOR_DK_GREEN, Graphics.COLOR_TRANSPARENT);
+            dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
         }
         dc.fillRectangle(xs + 1, ys + 1, (width-2) * battery / 100, height - 2);
 
@@ -88,7 +88,7 @@ class ConnectiqTimeView extends Ui.DataField {
         dc.fillRectangle(xs + width - 1, ys + 3, 3, height - 6);
 
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(xs + 1 + width / 2, ys + 6, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
+        dc.drawText(xs + 1 + width / 2, ys + 1 + height / 2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
     }
 
     function compute12Hour(hour) {
