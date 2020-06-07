@@ -66,8 +66,14 @@ class ConnectiqTimeView extends Ui.DataField {
             dc.drawText(x, y, Graphics.FONT_XTINY, amOrPm, LEFT_BOTTOM);
         }
 
+        // draw battery
         x = width2 - curTextSize[0] / 2 - xs;
         drawBattery(dc, x, 2, 27, 15);
+        
+        // draw temperature
+        //var temp = System.temperature;
+        //var tempUnit = System.temperatureUnits;
+        //System.println("temp = " + temp + " " + tempUnit);
     }
 
     function drawBattery(dc, xs, ys, width, height) {
