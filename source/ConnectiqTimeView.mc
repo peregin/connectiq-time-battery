@@ -57,7 +57,7 @@ class ConnectiqTimeView extends Ui.DataField {
         var curTextSize = dc.getTextDimensions(text, font);
 
         var x = width2 + curTextSize[0] / 2 - xs;
-        var y = height - curTextSize[1] + 5;
+        var y = height - curTextSize[1] + 1;
         if (is24Hour) {
             dc.drawText(x, y, font, text, RIGHT_BOTTOM);
         } else {
@@ -94,7 +94,7 @@ class ConnectiqTimeView extends Ui.DataField {
         dc.fillRectangle(xs + width - 1, ys + 3, 3, height - 6);
 
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(xs + 1 + width / 2, ys + 1 + height / 2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
+        dc.drawText(xs + 1 + width / 2, ys + height / 2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
     }
 
     function compute12Hour(hour) {
