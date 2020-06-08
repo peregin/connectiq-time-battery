@@ -29,7 +29,19 @@ class ConnectiqTimeApp extends App.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        return [ new ConnectiqTimeView() ];
+    	if (Toybox.System has :ServiceDelegate) {
+    		System.println("registering backround event listener");    	 
+    		Background.registerForTemporalEvent(new Time.Duration(5 * 60)); // tick every 5th minute
+   		}
+        return [new ConnectiqTimeView()];
     }
+    
+    function onBackgroundData(temperature) {
+    	Storage.setValue("sensor_temp", temperature);
+	}
+    
+    function getServiceDelegate(){
+		return [new TemperatureServiceDelegate()];
+	}
 
 }

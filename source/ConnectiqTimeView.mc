@@ -19,13 +19,22 @@ class ConnectiqTimeView extends Ui.DataField {
     hidden var backgroundColor = Graphics.COLOR_WHITE;
     hidden var textColor = Graphics.COLOR_BLACK;
     hidden var unitColor = 0x444444;
+    
+    hidden var temperatureUnit = "C";
 
     // Set the label of the data field here.
     function initialize() {
         DataField.initialize();
 
         hasBackgroundColorOption = (self has :getBackgroundColor);
-        System.println("has background color = " + hasBackgroundColorOption);
+        System.println("has background color=" + hasBackgroundColorOption);
+        var settings = System.getDeviceSettings();
+        is24Hour = settings.is24Hour;
+        System.println("is 24 hour format=" + is24Hour);
+        if (settings.temperatureUnits == System.UNIT_STATUTE) {
+        	temperatureUnit = "F";
+        }
+        System.println("temperature unit=" + temperatureUnit);
     }
 
     function onLayout(dc) {
@@ -58,12 +67,13 @@ class ConnectiqTimeView extends Ui.DataField {
 
         var x = width2 + curTextSize[0] / 2 - xs;
         var y = height - curTextSize[1] + 1;
-        if (is24Hour) {
-            dc.drawText(x, y, font, text, RIGHT_BOTTOM);
-        } else {
-            dc.drawText(x, y, font, text, RIGHT_BOTTOM);
+        var rightX = x;
+        dc.drawText(x, y, font, text, RIGHT_BOTTOM);
+        if (!is24Hour) {
+         	font = Graphics.FONT_XTINY;
             var amOrPm = (clockTime.hour < 12) ? "am" : "pm";
-            dc.drawText(x, y, Graphics.FONT_XTINY, amOrPm, LEFT_BOTTOM);
+            dc.drawText(x, y, font, amOrPm, LEFT_BOTTOM);
+            rightX += dc.getTextDimensions(text, font)[0];
         }
 
         // draw battery
@@ -71,9 +81,15 @@ class ConnectiqTimeView extends Ui.DataField {
         drawBattery(dc, x, 2, 27, 15);
         
         // draw temperature
-        //var temp = System.temperature;
-        //var tempUnit = System.temperatureUnits;
-        //System.println("temp = " + temp + " " + tempUnit);
+        var temperature = Application.Storage.getValue("sensor_temp");
+        //System.println("sensor_temp=" + temperature);
+        if (temperature != null) {
+        	font = Graphics.FONT_TINY;
+        	text = format("$1$$2$", [temperature.format("%.1d"), temperatureUnit]);
+        	x = rightX - dc.getTextDimensions(text, font)[0];
+        	dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
+        	dc.drawText(x, -1, font, text, RIGHT_BOTTOM);
+        }
     }
 
     function drawBattery(dc, xs, ys, width, height) {
