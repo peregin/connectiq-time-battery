@@ -1,7 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Issues](https://img.shields.io/github/issues/peregin/connectiq-time-battery.svg)](https://github.com/peregin/connectiq-time-battery/issues)
 
-Garmin data field for time of day and battery information
+Garmin data field with time of day, battery and temperature information
 =========================================================
 
 The data field shows the current time of day as main indicators.
