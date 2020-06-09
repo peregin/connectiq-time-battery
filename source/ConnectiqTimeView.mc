@@ -67,18 +67,18 @@ class ConnectiqTimeView extends Ui.DataField {
 
         var x = width2 + curTextSize[0] / 2 - xs;
         var y = height - curTextSize[1] + 1;
-        var rightX = x;
+        var rightX = x; // store the right size of the time to align temperature with it
         dc.drawText(x, y, font, text, RIGHT_BOTTOM);
         if (!is24Hour) {
          	font = Graphics.FONT_XTINY;
             var amOrPm = (clockTime.hour < 12) ? "am" : "pm";
             dc.drawText(x, y, font, amOrPm, LEFT_BOTTOM);
-            rightX += dc.getTextDimensions(text, font)[0];
+            rightX += dc.getTextDimensions(amOrPm, font)[0]; // plus the am or pm indicator
         }
 
         // draw battery
         x = width2 - curTextSize[0] / 2 - xs;
-        drawBattery(dc, x, 2, 27, 15);
+        drawBattery(dc, x, 3, 27, 15);
         
         // draw temperature
         var temperature = Application.Storage.getValue("sensor_temp");
@@ -86,9 +86,17 @@ class ConnectiqTimeView extends Ui.DataField {
         if (temperature != null) {
         	font = Graphics.FONT_TINY;
         	text = format("$1$$2$", [temperature.format("%.1d"), temperatureUnit]);
-        	x = rightX - dc.getTextDimensions(text, font)[0];
+        	curTextSize = dc.getTextDimensions(text, font);
+        	x = rightX - curTextSize[0];
+        	y = curTextSize[1];
+        	
         	dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        	dc.drawText(x, -1, font, text, RIGHT_BOTTOM);
+        	dc.drawText(x, 0, font, text, LEFT_BOTTOM);
+        	
+        	//dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
+        	//var r = y/4;
+        	//dc.fillCircle(x - r*2, y - r, y/4);
+        	//dc.fillRectangle(x - r*2-2, r/2, 5, y - r);
         }
     }
 
@@ -110,7 +118,7 @@ class ConnectiqTimeView extends Ui.DataField {
         dc.fillRectangle(xs + width - 1, ys + 3, 3, height - 6);
 
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(xs + 1 + width / 2, ys + height / 2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
+        dc.drawText(xs + 1 + width / 2, ys - 1 + height / 2, Graphics.FONT_XTINY, format("$1$%", [battery.format("%d")]), CENTER);
     }
 
     function compute12Hour(hour) {
