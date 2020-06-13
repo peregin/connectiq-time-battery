@@ -80,12 +80,16 @@ class ConnectiqTimeView extends Ui.DataField {
         x = width2 - curTextSize[0] / 2 - xs;
         drawBattery(dc, x, 3, 27, 15);
         
+        
         // draw temperature
         var temperature = Application.Storage.getValue("sensor_temp");
-        //System.println("sensor_temp=" + temperature);
         if (temperature != null) {
-        	font = Graphics.FONT_TINY;
+            // the sensor temperature is always in C, when statue unit is set needs to be converted
+        	if (temperatureUnit.equals("F")) {
+        		temperature = (temperature * 1.8) + 32;
+        	}
         	text = format("$1$$2$", [temperature.format("%.1d"), temperatureUnit]);
+        	font = Graphics.FONT_TINY;
         	curTextSize = dc.getTextDimensions(text, font);
         	x = rightX - curTextSize[0];
         	y = curTextSize[1];
