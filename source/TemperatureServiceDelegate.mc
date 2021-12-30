@@ -12,7 +12,7 @@ class TemperatureServiceDelegate extends Toybox.System.ServiceDelegate {
 		    //System.println("temperature=" + si.temperature);
 			Background.exit(si.temperature);
 		} else {
-			Background.exit(0);
+			Background.exit(null);
 		} 
 	}
 }

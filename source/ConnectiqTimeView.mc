@@ -78,7 +78,7 @@ class ConnectiqTimeView extends Ui.DataField {
 
         // draw battery
         x = width2 - curTextSize[0] / 2 - xs;
-        drawBattery(dc, x, 3, 27, 15);
+        drawBattery(dc, x, 3, 27, 17);
         
         // draw temperature
         var temperature = Application.Storage.getValue("sensor_temp");
@@ -88,7 +88,7 @@ class ConnectiqTimeView extends Ui.DataField {
         		temperature = (temperature * 1.8) + 32;
         	}
         	text = format("$1$$2$", [temperature.format("%.1d"), temperatureUnit]);
-        	font = Graphics.FONT_TINY;
+        	font = Graphics.FONT_MEDIUM;
         	curTextSize = dc.getTextDimensions(text, font);
         	x = rightX - curTextSize[0];
         	y = curTextSize[1];

@@ -38,7 +38,9 @@ class ConnectiqTimeApp extends App.AppBase {
     
     // value provided by the TemperatureServiceDelegate
     function onBackgroundData(temperature) {
-    	Storage.setValue("sensor_temp", temperature);
+        if (temperature != null) {
+            Storage.setValue("sensor_temp", temperature);
+        }
 	}
     
     function getServiceDelegate(){
