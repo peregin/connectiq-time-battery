@@ -9,7 +9,14 @@ On the top of the field it displays the battery level.
 
 ![edge830](https://raw.github.com/peregin/connectiq-time-battery/master/doc/edge830.png "edge830")
 
-Local Deployment
+Build
+---
+Build package ready to deploy to Garmin App store.
+```shell
+make package
+```
+
+Manual Deployment
 ---
 
 Copy the prg file over the `/GARMIN/APPS/` folder.
