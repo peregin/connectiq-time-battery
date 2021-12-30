@@ -1,5 +1,6 @@
 TODO
 ====
+- new cover and upload
 - if no internal temperature sensor then use the extarnal one if exists
 
 DONE
