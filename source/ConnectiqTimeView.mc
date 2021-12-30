@@ -80,7 +80,6 @@ class ConnectiqTimeView extends Ui.DataField {
         x = width2 - curTextSize[0] / 2 - xs;
         drawBattery(dc, x, 3, 27, 15);
         
-        
         // draw temperature
         var temperature = Application.Storage.getValue("sensor_temp");
         if (temperature != null) {

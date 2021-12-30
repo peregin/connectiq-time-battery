@@ -36,6 +36,7 @@ class ConnectiqTimeApp extends App.AppBase {
         return [new ConnectiqTimeView()];
     }
     
+    // value provided by the TemperatureServiceDelegate
     function onBackgroundData(temperature) {
     	Storage.setValue("sensor_temp", temperature);
 	}
