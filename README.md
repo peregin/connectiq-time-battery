@@ -8,6 +8,8 @@ The data field shows the current time of day as main indicators.
 On the top of the field it displays the battery level.
 
 ![edge830](https://raw.github.com/peregin/connectiq-time-battery/master/doc/edge830.png "edge830")
+&nbsp;
+![edge1040](https://raw.github.com/peregin/connectiq-time-battery/master/doc/edge1040.png "edge1040")
 
 Build
 ---
