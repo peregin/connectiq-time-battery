@@ -13,6 +13,7 @@ On the top of the field it displays the battery level.
 
 Build
 ---
+Don't forget to update the version number in the manifest.xml file.
 Build package ready to deploy to Garmin App store.
 ```shell
 make package

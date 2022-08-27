@@ -1,4 +1,6 @@
 using Toybox.Application as App;
+using Toybox.Background;
+using Toybox.Time;
 
 /**
  * Data field to show time of day and additional information on teh top of the screen.
