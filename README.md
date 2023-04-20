@@ -23,3 +23,7 @@ Manual Deployment
 ---
 
 Copy the prg file over the `/GARMIN/APPS/` folder.
+
+Compatible Devices
+---
+https://developer.garmin.com/connect-iq/compatible-devices/

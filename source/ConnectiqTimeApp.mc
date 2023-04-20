@@ -34,7 +34,9 @@ class ConnectiqTimeApp extends App.AppBase {
     	if (Toybox.System has :ServiceDelegate) {
     		System.println("registering backround event listener");    	 
     		Background.registerForTemporalEvent(new Time.Duration(5 * 60)); // tick every 5th minute
-   		}
+   		} else {
+            System.println("UNABLE to register backround event listener");
+        }
         return [new ConnectiqTimeView()];
     }
     

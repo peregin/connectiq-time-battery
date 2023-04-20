@@ -63,6 +63,7 @@ class ConnectiqTimeView extends Ui.DataField {
             text = Lang.format("$1$:$2$", [compute12Hour(clockTime.hour), clockTime.min.format("%.2d")]);
         }
         dc.setColor(textColor, Graphics.COLOR_TRANSPARENT);
+        //dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
         var curTextSize = dc.getTextDimensions(text, font);
 
         var x = width2 + curTextSize[0] / 2 - xs;
@@ -80,7 +81,7 @@ class ConnectiqTimeView extends Ui.DataField {
         x = width2 - curTextSize[0] / 2 - xs;
         drawBattery(dc, x, 3, 27, 17);
         
-        // draw temperature
+        // draw temperature - the simulator on version 4.2.4 is it not shown
         var temperature = Application.Storage.getValue("sensor_temp");
         if (temperature != null) {
             // the sensor temperature is always in C, when statue unit is set needs to be converted
